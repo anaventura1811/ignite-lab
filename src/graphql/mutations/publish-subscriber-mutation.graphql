@@ -1,0 +1,12 @@
+mutation publishSubscriber($email: String!, $id: ID!) {
+  publishSubscriber(where: {email: $email , id: $id }, to: PUBLISHED) {
+    documentInStages(stages: PUBLISHED) {
+      email
+      name
+      id
+    }
+    name
+    id
+    email
+  }
+}
