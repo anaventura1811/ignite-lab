@@ -1,33 +1,9 @@
-import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { useState, FormEvent, useMemo, useCallback, useEffect } from 'react';
 import { Logo } from '../../components/logo';
+import { useCreateSubscriberMutation, usePublishSubscriberMutation } from '../../graphql/generated';
 
 type Props = {}
-
-const CREATE_SUBSCRIBER_MUTATION = gql`
-  mutation createSubscriber($name: String!, $email: String!) {
-    createSubscriber(data: { name: $name, email: $email }) {
-      id
-    }
-  }
-`;
-
-const PUBLISH_SUBSCRIBER_MUTATION = gql`
-  mutation publishSubscriber($email: String!, $id: ID!) {
-    publishSubscriber(where: {email: $email , id: $id }, to: PUBLISHED) {
-      documentInStages(stages: PUBLISHED) {
-        email
-        name
-        id
-      }
-      name
-      id
-      email
-    }
-  }
-`;
-
 
 export function Subscribe({}: Props) {
 
@@ -40,9 +16,9 @@ export function Subscribe({}: Props) {
   const [
     createSubscriber,
     { data, loading, error }
-  ] = useMutation(CREATE_SUBSCRIBER_MUTATION);
+  ] = useCreateSubscriberMutation();
 
-  const [publishSubscriber, { data: dSub}] = useMutation(PUBLISH_SUBSCRIBER_MUTATION);
+  const [publishSubscriber, { data: dSub}] = usePublishSubscriberMutation();
 
   const handleSubscribe = useCallback(async (ev: FormEvent) => {
   
