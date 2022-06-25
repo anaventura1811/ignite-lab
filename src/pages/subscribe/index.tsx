@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import img from '/src/assets/imgs/code-mockup.png';
 import { useState, FormEvent, useMemo, useCallback, useEffect } from 'react';
 import { Logo } from '../../components/logo';
 import { useCreateSubscriberMutation, usePublishSubscriberMutation } from '../../graphql/generated';
@@ -113,7 +114,7 @@ export function Subscribe({}: Props) {
           </form>
         </div>
       </div>
-      <img src='/src/assets/imgs/code-mockup.png' className='mt-10'/>
+      <img src={img} className='mt-10'/>
     </div>
   );
 }
